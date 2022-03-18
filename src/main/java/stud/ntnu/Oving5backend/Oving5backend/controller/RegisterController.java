@@ -11,7 +11,6 @@ import stud.ntnu.Oving5backend.Oving5backend.repository.UserRepository;
 import stud.ntnu.Oving5backend.Oving5backend.service.CalculationService;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 public class RegisterController {
@@ -28,8 +27,8 @@ public class RegisterController {
     }
 
     @GetMapping("/registerUser/{id}")
-    public Optional<User> getSpecificUser (@PathVariable("id") long id){
-        return userRepository.findById(id);
+    public User getSpecificUser (@PathVariable("id") long id){
+        return userRepository.findById(id).get();
     }
 
     @PostMapping("/saveCalculationsToAUser/{id}")
@@ -44,7 +43,7 @@ public class RegisterController {
 
     @GetMapping("/registerUser/equations/{id}")
     public List<Calculation> getCalculationsToAUser(@PathVariable("id") long id){
-        return getSpecificUser(id).get().getCalculations();
+        return getSpecificUser(id).getCalculations();
     }
 
     @GetMapping("/users")
@@ -52,44 +51,3 @@ public class RegisterController {
         return userRequest.getUser();
     }
 }
-
-/*
-package stud.ntnu.Oving5backend.Oving5backend.controller;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
-import stud.ntnu.Oving5backend.Oving5backend.dto.OrderRequest;
-import stud.ntnu.Oving5backend.Oving5backend.dto.OrderResponse;
-import stud.ntnu.Oving5backend.Oving5backend.entity.Customer;
-import stud.ntnu.Oving5backend.Oving5backend.repository.CustomerRepository;
-import stud.ntnu.Oving5backend.Oving5backend.repository.ProductRepository;
-
-import java.util.List;
-
-@RestController
-public class OrderController {
-    @Autowired
-    private CustomerRepository customerRepository;
-    @Autowired
-    private ProductRepository productRepository;
-
-    @PostMapping("/placeOrder")
-    public Customer placeOrder(@RequestBody OrderRequest request){
-        return customerRepository.save(request.getCustomer());
-    }
-
-    @GetMapping("/findAllOrders")
-    public List<Customer> findAllOrders(){
-        return customerRepository.findAll();
-    }
-
-    @GetMapping("/getInfo")
-    public List<OrderResponse> getJoinInformation(){
-        return customerRepository.getJoinInformation();
-    }
-
-}
- */
