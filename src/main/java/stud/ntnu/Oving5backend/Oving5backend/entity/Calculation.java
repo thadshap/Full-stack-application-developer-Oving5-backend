@@ -18,4 +18,8 @@ public class Calculation {
     private String equation;
     @Column(name = "answer", nullable = false)
     private double answer;
+
+    public Calculation(String equation) {
+        this.equation = equation;
+    }
 }
