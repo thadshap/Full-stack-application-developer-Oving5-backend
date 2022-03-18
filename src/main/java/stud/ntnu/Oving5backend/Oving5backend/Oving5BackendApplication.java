@@ -11,3 +11,27 @@ public class Oving5BackendApplication {
 	}
 
 }
+
+/*
+{
+    "customer":{
+        "name": "Thadshajini",
+        "email": "thadsha1710@live.no",
+        "gender": "woman",
+        "products":[
+            {
+                "pid":201,
+                "productName": "Mobile",
+                "price":10000,
+                "qty":1
+            },
+            {
+                "pid":399,
+                "productName": "Laptop",
+                "price":200000,
+                "qty":3
+            }
+        ]
+    }
+}
+ */
