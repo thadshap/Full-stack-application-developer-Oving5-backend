@@ -13,6 +13,7 @@ import stud.ntnu.Oving5backend.Oving5backend.service.CalculationService;
 import java.util.List;
 
 @RestController
+@CrossOrigin("http://localhost:8080/")
 public class RegisterController {
     @Autowired
     private UserRepository userRepository;
@@ -32,13 +33,14 @@ public class RegisterController {
     }
 
     @PostMapping("/saveCalculationsToAUser/{id}")
-    public void saveCalculationsToAUser(@RequestBody EquationsRequest equationsRequest, @PathVariable("id") long id){
+    public String saveCalculationsToAUser(@RequestBody EquationsRequest equationsRequest, @PathVariable("id") long id){
         Calculation newExpression = new Calculation();
         newExpression.setEquation(equationsRequest.getEquation());
         System.out.println(equationsRequest.getEquation());
         String answer = calculationService.getAnswer(equationsRequest.getEquation());
         newExpression.setAnswer(Double.parseDouble(answer));
         calculationRepository.insertWithQuery(newExpression, id);
+        return answer;
     }
 
     @GetMapping("/registerUser/equations/{id}")
@@ -47,7 +49,7 @@ public class RegisterController {
     }
 
     @GetMapping("/users")
-    public User getUsers(@RequestBody UserRequest userRequest){
-        return userRequest.getUser();
+    public List<User> getUsers(){
+        return userRepository.findAll();
     }
 }
