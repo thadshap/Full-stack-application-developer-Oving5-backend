@@ -1,6 +1,7 @@
 package stud.ntnu.Oving5backend.Oving5backend.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import stud.ntnu.Oving5backend.Oving5backend.dto.EquationsRequest;
 import stud.ntnu.Oving5backend.Oving5backend.dto.UserRequest;
@@ -13,7 +14,7 @@ import stud.ntnu.Oving5backend.Oving5backend.service.CalculationService;
 import java.util.List;
 
 @RestController
-@CrossOrigin("http://localhost:8080/")
+@CrossOrigin
 public class RegisterController {
     @Autowired
     private UserRepository userRepository;
